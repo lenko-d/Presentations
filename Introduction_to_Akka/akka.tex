@@ -1,0 +1,366 @@
+\documentclass{beamer}
+
+\usetheme{Singapore}
+
+\usepackage{listings}
+
+\title{Introduction to Akka}
+\author{Lenko Donchev}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section[Outline]{}
+\frame{\tableofcontents}
+
+\section{Introduction}
+\subsection{Akka overview}
+
+\frame
+    {
+      \frametitle{What is Akka?}
+      
+      \begin{itemize}
+      \item Event-driven middleware framework for building high
+        performance and reliable distributed applications in Scala and Java.
+      \item  Open Source and available under the Apache 2 License.
+      \end{itemize}
+    }
+
+\frame
+    {
+      \frametitle{Why Akka?}
+      
+      \begin{itemize}
+      \item Scalability
+      \item Concurrency
+      \item Fault-Tolerance
+      \end{itemize}
+    }
+
+\frame
+    {
+      \frametitle{Simple Concurrency Distribution}
+
+      \begin{itemize}
+        \item Asynchronous and Distributed by design.
+        \item High-level abstractions like Actors, Futures and STM
+      \end{itemize}
+    }
+
+
+
+\frame
+    {
+      \frametitle{Resilient by Design}
+
+      \begin{itemize}
+        \item Write systems that self-heal. 
+        \item Remote and/or local supervisor hierarchies.
+      \end{itemize}
+    }
+
+
+\frame
+    {
+      \frametitle{High Performance}
+
+      \begin{itemize}
+        \item 50 million msg/sec on a single machine. 
+        \item Small memory footprint; ~2.5 million actors per GB of heap.. 
+      \end{itemize}
+    }
+
+
+\frame
+    {
+      \frametitle{Elastic Decentralized}
+
+      \begin{itemize}
+        \item  Adaptive load balancing, routing, partitioning and configuration-driven remoting.
+      \end{itemize}
+    }
+
+
+\frame
+    {
+      \frametitle{Extensible}
+
+      \begin{itemize}
+        \item Use Akka Extensions to adapt Akka to fit your needs.
+      \end{itemize}
+    }
+
+
+
+
+    \frame
+        {
+          \frametitle{STM - Software Transactional Memory}
+          \begin{itemize}
+          \item Turns the JVM heap into a transactional data set
+          \item Provides begin/commit/rollback semantics
+          \item Implements the first three letters of ACID
+            atomicity - all or none
+            consistency - data is left in a consistent state
+            isolation - only participants see changes during transaction
+          \item Not Durable because STM is in-memory
+          \item Modeled After Clojure's STM
+          \item Transactions are automatically retried on collisions
+          \end{itemize}
+        }
+
+
+
+\frame
+    {
+      \frametitle{Concurrency with Actors}
+      \begin{itemize}
+      \item Provides a high-level abstraction for concurrent and distributed
+        system development
+      \item  Asynchronous message processing using event-driven
+        receive loop
+      \item Removes the burden of explicit thread and lock management to
+        make concurrent programming easier
+      \item Pattern matching
+        against messages is a convenient way to express an actor's
+        behavior.
+      \item Very lightweight
+      \item Helps you to focus on the message workflow instead of
+        low level primitives like threads, locks and socket IO
+      \end{itemize}
+    }
+
+
+
+\frame
+    {
+      \frametitle{The origin of Actors}
+      \begin{itemize}
+      \item Defined in a 1973 paper by Carl Hewitt
+
+      \item Popularized by Erlang
+
+      \item originally developed at Ericsson
+      \item  designed for distributed, fault-tolerant, non-stop systems
+      \item 9-nine's reliability or down-time of 31 ms/year
+      \item direct support for actor concurrency model in the language
+      \item supports hot-swapping of code
+      \end{itemize}
+    }
+
+
+
+
+\frame
+{
+  \frametitle{An Actor...}
+
+  \begin{itemize}
+  \item Encapsulates state and behavior into a lightweight "process"
+  \item Shares nothing with other actors
+  \item Communicates with other actors through messages 
+  \item Communicates asynchronously
+  \item Has a message queue or "mailbox"
+  \item Non-blocking
+
+  \end{itemize}
+}
+
+\frame
+    {
+      \frametitle{Advantages of the Actor Model}
+      \begin{itemize}
+      \item Is easier to reason about
+      \item Raises the level of abstraction
+      \item Makes it easier to avoid:
+        \begin{itemize}
+        \item race conditions
+        \item deadlocks
+        \item starvation
+        \item live locks
+        \end{itemize}
+      \end{itemize}
+    }
+
+
+
+\frame
+{
+  \frametitle{Remote Actors}
+  \begin{itemize}
+  \item Remote Actors provide a way to scale "out"
+  \item Actors are excellent for distributed computing
+  \item Remote Actors are implemented with NIO on top of
+    \begin{itemize}
+    \item JBoss Netty; an NIO client server framework
+    \item Google Protcol Buffers; structured data encoding format
+    \end{itemize}
+  \end{itemize}
+}
+
+
+\section{Examples}
+\subsection{Example Akka actors}
+
+\begin{frame}[fragile]
+  \frametitle{Example Actor in Scala}
+
+  \begin{lstlisting}
+    class HelloWorldActor extends Actor {
+      def receive = {
+        case "hello" => println("Hello World!")
+        case _ => println("hi")
+      }
+    }
+  \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Example Actor in Java}
+
+  \begin{lstlisting}
+    public class HelloWorldActor extends UntypedActor {
+      public void onReceive(Object message) throws Exception {
+        if (message instanceof String)
+         System.out.println("Hello world...");
+        else
+         System.out.println("hi");
+      }
+    }
+  \end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Asynchronous Messaging in Java}
+
+  \begin{lstlisting}
+    helloWorldActor.sendOneWay("Hello");
+  \end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Synchronous Messaging in Java}
+
+  \begin{lstlisting}
+    // send and receive
+    try {
+      Object result =
+      printer.sendRequestReply("Hello", getContext(), 1000);
+    } catch(ActorTimeoutException ate) {
+      // handle timeout
+    }
+  \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Replying to Messages}
+
+  \begin{lstlisting}
+    self.reply("reply")
+
+    // Scala
+    self.sender.get ! "reply"
+
+  \end{lstlisting}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Asynchronous Messaging in Scala}
+
+  \begin{lstlisting}
+    // fire-and-forget syntax (asynchronous)
+    helloWorldActor ! "Hello"
+    // returns immediately
+
+  \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Synchronous Messaging in Scala}
+
+  \begin{lstlisting}
+    // Send-and-Receive syntax (synchronous)
+    helloWorldActor !! "Hello"
+  \end{lstlisting}
+\end{frame}
+
+
+
+\frame
+    {
+      \frametitle{Fault Tolerance}
+      \begin{itemize}
+      \item The "let it crash" approach
+      \item Designed for concurrent and distributed systems
+      \item Notification of failures
+      \item Supervision and repair of failed nodes
+      \item Components are monitored by a "linked" supervisor
+        When the supervisor detects failure, nodes are:
+        \begin{itemize}
+        \item reset to a stable state
+        \item restarted
+        \end{itemize}
+      \end{itemize}
+    }
+
+\frame
+{
+  \frametitle{Restart Strategies}
+  Akka supports two restart strategies
+  \begin{itemize}
+  \item OneForOne - restarts the component that crashed
+  \item AllForOne - restarts all managed components if one crashed
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Add-On Modules}
+  \begin{itemize}
+  \item Persistence
+  \item STM integration with NoSQL DBs for the 'D' in ACID
+    Cassandra, MongoDB, Redis, CouchDB, Amazon SimpleDB,
+    and others
+  \item AMQP - based on the RabbitMQ client
+  \item JTA - allows STM to participate in a JTA transaction
+  \item Spring Integration
+  \item Guice Integration
+  \end{itemize}
+}
+
+\section{Example building a simple Distributed Search Engine}
+
+\frame
+{
+  \frametitle{Example: Building a  simple Distributed Search Engine}
+  \href{https://github.com/lenko-d/distributed\_search\_engine\_in\_akka}{https://github.com/lenko-d/distributed\_search\_engine}
+}
+
+
+
+
+\section{About}
+
+\frame
+{
+	\frametitle{About}
+        \begin{center}
+        Lenko Donchev 
+        \end{center}
+        \begin{center}
+        \href{http://twitter.com/Lenko\_HD}{ @Twitter: Lenko\_HD}
+        \end{center}
+}
+
+\end{document}

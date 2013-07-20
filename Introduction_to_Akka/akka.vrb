@@ -1,0 +1,12 @@
+\frametitle {Example Actor in Java}
+
+  \begin{lstlisting}
+    public class HelloWorldActor extends UntypedActor {
+      public void onReceive(Object message) throws Exception {
+        if (message instanceof String)
+         System.out.println("Hello world...");
+        else
+         System.out.println("hi");
+      }
+    }
+  \end{lstlisting}
