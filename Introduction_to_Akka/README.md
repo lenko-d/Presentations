@@ -11,4 +11,4 @@ I created it using the Beamer LaTeX class.
 ## TODO
 
 * Add more content and code samples.
-* Build sampe distributed search engine as an example for the presentation.
+* Build a distributed search engine as an example for the presentation.
