@@ -159,12 +159,13 @@
 
   \begin{itemize}
   \item Encapsulates state and behavior into a lightweight "process"
+  \item Supports Hot Swapping of the Actor’s message loop (e.g. its implementation) at runtime. 
   \item Shares nothing with other actors
   \item Communicates with other actors through messages 
   \item Communicates asynchronously
   \item Has a message queue or "mailbox"
+  \item Has support for durable mailboxes
   \item Non-blocking
-
   \end{itemize}
 }
 
@@ -197,6 +198,102 @@
     \item JBoss Netty; an NIO client server framework
     \item Google Protcol Buffers; structured data encoding format
     \end{itemize}
+  \end{itemize}
+}
+
+
+\frame
+    {
+      \frametitle{Fault Tolerance}
+      \begin{itemize}
+      \item The "let it crash" approach
+      \item Designed for concurrent and distributed systems
+      \item Notification of failures
+      \item Supervision and repair of failed nodes
+      \end{itemize}
+    }
+
+
+\frame
+{
+  \frametitle{Accept Failure as a fact of life and manage it}
+  Built in Fault-tolerant design from the ground up
+  \begin{itemize}
+    \item Supervisor Hierarchies have a different view of failure
+    \item Components are monitored by a "linked" supervisor
+        When the supervisor detects failure, nodes are:
+         \begin{itemize}
+           \item reset to a stable state
+           \item restarted
+         \end{itemize}
+  \end{itemize}
+}
+
+
+\frame
+{
+  \frametitle{Restart Strategies}
+  Akka supports two restart strategies
+  \begin{itemize}
+  \item OneForOne - restarts the component that crashed
+  \item AllForOne - restarts all managed components if one crashed
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{OneForOne Strategy}
+  \begin{itemize}
+  \item Failure of one actor forces restart of only that actor
+    \begin{itemize}
+       \item Actor Fails, throwing exception
+       \item Exception thrown by actor is propagated to Supervisor
+       \item Supervising Actor restarts failed actor
+    \end{itemize}
+  \item Restart initializes actor to a well-known state
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{AllForOne Strategy}
+  \begin{itemize}
+  \item Failure of one actor forces restart of all supervised actors
+    \begin{itemize}
+       \item Actor Fails, throwing exception
+       \item Exception thrown by actor is propagated to Supervisor
+       \item Supervising Actor restarts all supervised actors
+    \end{itemize}
+  \item Restart initializes actors to a well-known state
+  \end{itemize}
+}
+
+\frame
+{
+  \frametitle{Restart Callbacks}
+  \begin{itemize}
+  \item Actors have 2 different restart callbacks
+    \begin{itemize}
+       \item pre restart
+       \item post restart
+    \end{itemize}
+  \item Used to clean up and reinitialize state upon restart
+  \end{itemize}
+}
+
+
+\frame
+{
+  \frametitle{Add-On Modules}
+  \begin{itemize}
+  \item Persistence
+  \item STM integration with NoSQL DBs for the 'D' in ACID
+    Cassandra, MongoDB, Redis, CouchDB, Amazon SimpleDB,
+    and others
+  \item AMQP - based on the RabbitMQ client
+  \item JTA - allows STM to participate in a JTA transaction
+  \item Spring Integration
+  \item Guice Integration
   \end{itemize}
 }
 
@@ -252,7 +349,7 @@
     // send and receive
     try {
       Object result =
-      printer.sendRequestReply("Hello", getContext(), 1000);
+      helloWorldActor.sendRequestReply("Hello", getContext(), 1000);
     } catch(ActorTimeoutException ate) {
       // handle timeout
     }
@@ -296,57 +393,11 @@
 \end{frame}
 
 
-
-\frame
-    {
-      \frametitle{Fault Tolerance}
-      \begin{itemize}
-      \item The "let it crash" approach
-      \item Designed for concurrent and distributed systems
-      \item Notification of failures
-      \item Supervision and repair of failed nodes
-      \item Components are monitored by a "linked" supervisor
-        When the supervisor detects failure, nodes are:
-        \begin{itemize}
-        \item reset to a stable state
-        \item restarted
-        \end{itemize}
-      \end{itemize}
-    }
-
-\frame
-{
-  \frametitle{Restart Strategies}
-  Akka supports two restart strategies
-  \begin{itemize}
-  \item OneForOne - restarts the component that crashed
-  \item AllForOne - restarts all managed components if one crashed
-  \end{itemize}
-}
-
-\frame
-{
-  \frametitle{Add-On Modules}
-  \begin{itemize}
-  \item Persistence
-  \item STM integration with NoSQL DBs for the 'D' in ACID
-    Cassandra, MongoDB, Redis, CouchDB, Amazon SimpleDB,
-    and others
-  \item AMQP - based on the RabbitMQ client
-  \item JTA - allows STM to participate in a JTA transaction
-  \item Spring Integration
-  \item Guice Integration
-  \end{itemize}
-}
-
-\section{Example building a simple Distributed Search Engine}
-
 \frame
 {
   \frametitle{Example: Building a  simple Distributed Search Engine}
   \href{https://github.com/lenko-d/distributed\_search\_engine\_in\_akka}{https://github.com/lenko-d/distributed\_search\_engine}
 }
-
 
 
 
