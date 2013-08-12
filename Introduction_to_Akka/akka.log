@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.8.6)  7 AUG 2013 00:22
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2013.8.6)  11 AUG 2013 20:48
 entering extended mode
  %&-line parsing enabled.
 **akka.tex
@@ -866,15 +866,15 @@ LaTeX Font Warning: Font shape `OMS/cmss/m/n' undefined
 
 ] [12
 
+] [13
+
+] [14
+
 ]
 Missing character: There is no â in font cmss10!
 Missing character: There is no € in font cmss10!
 Missing character: There is no ™ in font cmss10!
- [13
-
-] [14
-
-] [15
+ [15
 
 ] [16
 
@@ -890,6 +890,10 @@ Missing character: There is no ™ in font cmss10!
 ] [21
 
 ] [22
+
+] [23
+
+] [24
 
 ]
 \openout4 = `akka.vrb'.
@@ -908,7 +912,7 @@ Overfull \hbox (1.50334pt too wide) in paragraph at lines 6--7
 [][][][][][][][][][][][][][][][][] 
  []
 
-) [23
+) [25
 
 ]
 \openout4 = `akka.vrb'.
@@ -923,12 +927,12 @@ Overfull \hbox (100.05437pt too wide) in paragraph at lines 5--6
 [][][][][][][][][][][][][][][][][][][] 
  []
 
-) [24
+) [26
 
 ]
 \openout4 = `akka.vrb'.
 
- (./akka.vrb) [25
+ (./akka.vrb) [27
 
 ]
 \openout4 = `akka.vrb'.
@@ -938,12 +942,12 @@ Overfull \hbox (139.47478pt too wide) in paragraph at lines 7--8
 [][][][][][][][][][][][][][] 
  []
 
-) [26
+) [28
 
 ]
 \openout4 = `akka.vrb'.
 
- (./akka.vrb) [27
+ (./akka.vrb) [29
 
 ]
 \openout4 = `akka.vrb'.
@@ -958,17 +962,17 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 4.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-)) [28
+)) [30
 
 ]
 \openout4 = `akka.vrb'.
 
  (./akka.vrb)
-[29
+[31
 
-] [30
+] [32
 
-] [31
+] [33
 
 ]
 \tf@nav=\write6
@@ -990,22 +994,25 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 15907 strings out of 495061
- 291597 string characters out of 1182622
- 388645 words of memory out of 3000000
+ 15912 strings out of 495061
+ 291650 string characters out of 1182622
+ 388672 words of memory out of 3000000
  18608 multiletter control sequences out of 15000+50000
  11124 words of font info for 41 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  49i,19n,59p,393b,1151s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/fonts
-/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
-cm/cmsy9.pfb>
-Output written on akka.pdf (31 pages, 429627 bytes).
+pdfTeX warning (dest): name{Outline0.3.1.23} has been referenced but does not
+ exist, replaced by a fixed one
+
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share
+/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texmf-texl
+ive/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/fonts/t
+ype1/public/amsfonts/cm/cmss8.pfb></usr/share/texmf-texlive/fonts/type1/public/
+amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
+/cmsy9.pfb>
+Output written on akka.pdf (33 pages, 453243 bytes).
 PDF statistics:
- 1888 PDF objects out of 2073 (max. 8388607)
- 69 named destinations out of 1000 (max. 500000)
+ 2005 PDF objects out of 2073 (max. 8388607)
+ 74 named destinations out of 1000 (max. 500000)
  79 words of extra memory for PDF output out of 10000 (max. 10000000)
 

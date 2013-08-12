@@ -1,6 +1,6 @@
 \beamer@endinputifotherversion {3.10pt}
 \beamer@sectionintoc {2}{Introduction}{3}{0}{1}
 \beamer@subsectionintoc {2}{1}{Akka overview}{3}{0}{1}
-\beamer@sectionintoc {3}{Examples}{23}{0}{2}
-\beamer@subsectionintoc {3}{1}{Example Akka actors}{23}{0}{2}
-\beamer@sectionintoc {4}{About}{31}{0}{3}
+\beamer@sectionintoc {3}{Examples}{25}{0}{2}
+\beamer@subsectionintoc {3}{1}{Example Akka actors}{25}{0}{2}
+\beamer@sectionintoc {4}{About}{33}{0}{3}
